@@ -1,5 +1,6 @@
 <?php
 namespace App\Entity;
+
 use FOS\UserBundle\Model\User as BundleUser;
 use Doctrine\ORM\Mapping as ORM;
 
