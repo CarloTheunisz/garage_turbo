@@ -16,10 +16,18 @@ class BaseService {
         $this->rep = $this->em->getRepository($entity);
     }
 
+    /**
+     * Functie: getEntityManager
+     * Doel:    geef de entity manager door
+     */
     public function getEntityManager() {
         return $this->em;
     }
 
+    /**
+     * Functie: getRep
+     * Doel:    geef de repository door
+     */
     public function getRep() {
         return $this->rep;
     }
