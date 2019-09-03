@@ -19,9 +19,9 @@ class KlantService extends BaseService {
 
     public function insertRecord() {
         $klant = new Klant();
-        $klant->setAutomerk($this->as->find(2));
+        $klant->setAutomerk($this->as->find(random_int(1, 3)));
         $klant->setKlantnaam('Placeholder');
-        $klant->setKenteken('36-PGN-5');
+        $klant->setKenteken($this->generateKenteken());
         $klant->setKilometerstand('0');
         $this->em->persist($klant);
         $this->em->flush();
@@ -35,5 +35,33 @@ class KlantService extends BaseService {
 
     public function deleteAll() {
         return $this->rep->deleteAll();
+    }
+
+    private function generateKenteken() {
+        $letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $cijfers = "0123456789";
+
+        $kenteken = "";
+        for($i = 0; $i < 8; $i++) {
+            switch ($i) {
+                case 0:
+                case 1:
+                case 7:
+                    $kenteken .= substr(str_shuffle($letters), $i, 1);
+                    break;
+                case 2:
+                case 6:
+                    $kenteken .= "-";
+                    break;
+                case 3:
+                case 4:
+                case 5:
+                    $kenteken .= substr(str_shuffle($cijfers), $i, 1);
+                    break;
+                default:
+                    break;
+            }
+        }
+        return $kenteken;
     }
 }

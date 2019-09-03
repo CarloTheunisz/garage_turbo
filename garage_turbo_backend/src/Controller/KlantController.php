@@ -50,6 +50,18 @@ class KlantController extends FOSRestController {
     }
 
     /**
+     * @Rest\Post("/create/testdata")
+     */
+    public function createTestData(Request $request):View {
+        $aantal = random_int(10, 100);
+        $data = array();
+        for ($i = 0; $i < $aantal; $i++) {
+            $data[] = $this->ks->insertRecord();
+        }
+        return( View::create($data, Response::HTTP_OK) );
+    }
+
+    /**
      * @Rest\Delete("/delete/all")
      */
     public function deleteAll(Request $request):View {
