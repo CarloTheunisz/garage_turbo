@@ -28,16 +28,6 @@ class Automerk
      */
     private $beurt_interval;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Klant", mappedBy="automerk", orphanRemoval=true)
-     */
-    private $klanten;
-
-    public function __construct()
-    {
-        $this->klanten = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -63,37 +53,6 @@ class Automerk
     public function setBeurtInterval(int $beurt_interval): self
     {
         $this->beurt_interval = $beurt_interval;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Klant[]
-     */
-    public function getKlanten(): Collection
-    {
-        return $this->klanten;
-    }
-
-    public function addKlanten(Klant $klanten): self
-    {
-        if (!$this->klanten->contains($klanten)) {
-            $this->klanten[] = $klanten;
-            $klanten->setAutomerk($this);
-        }
-
-        return $this;
-    }
-
-    public function removeKlanten(Klant $klanten): self
-    {
-        if ($this->klanten->contains($klanten)) {
-            $this->klanten->removeElement($klanten);
-            // set the owning side to null (unless already changed)
-            if ($klanten->getAutomerk() === $this) {
-                $klanten->setAutomerk(null);
-            }
-        }
 
         return $this;
     }
