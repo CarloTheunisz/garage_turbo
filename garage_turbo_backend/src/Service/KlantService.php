@@ -33,6 +33,17 @@ class KlantService extends BaseService {
         return new Response('Nieuwe klant opgeslagen met id '.$klant->getId());
     }
 
+    public function updateKilometerstand($id) {
+        $klant = $this->find($id);
+        $nieuweStand = $klant->getKilometerstand() + random_int(1000, 5000);
+
+        $klant->setKilometerstand($nieuweStand);
+        $this->em->persist($klant);
+        $this->em->flush();
+
+        return new Response('Kilometerstand opgehoogd bij klant_'.$klant->getId());
+    }
+
     public function deleteAll() {
         return $this->rep->deleteAll();
     }

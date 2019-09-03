@@ -62,6 +62,16 @@ class KlantController extends FOSRestController {
     }
 
     /**
+     * @Rest\Put("/update/kilometerstand/{id}")
+     */
+    public function updateKilometerstand(Request $request):View {
+        $id = $request->get("id");
+        $data = $this->ks->updateKilometerstand($id);
+
+        return( View::create($data, Response::HTTP_OK) );
+    }
+
+    /**
      * @Rest\Delete("/delete/all")
      */
     public function deleteAll(Request $request):View {
