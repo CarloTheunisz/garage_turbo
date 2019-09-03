@@ -41,6 +41,15 @@ class KlantController extends FOSRestController {
     }
 
     /**
+     * @Rest\Post("/create")
+     */
+    public function create(Request $request):View {
+        $data = $this->ks->insertRecord();
+
+        return( View::create($data, Response::HTTP_OK) );
+    }
+
+    /**
      * @Rest\Delete("/delete/all")
      */
     public function deleteAll(Request $request):View {
