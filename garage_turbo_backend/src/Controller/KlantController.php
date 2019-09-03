@@ -39,4 +39,13 @@ class KlantController extends FOSRestController {
 
         return( View::create($data, Response::HTTP_OK) );
     }
+
+    /**
+     * @Rest\Delete("/delete/all")
+     */
+    public function deleteAll(Request $request):View {
+        $data = $this->ks->deleteAll();
+
+        return( View::create($data, Response::HTTP_OK) );
+    }
 }

@@ -19,6 +19,13 @@ class KlantRepository extends ServiceEntityRepository
         parent::__construct($registry, Klant::class);
     }
 
+    public function deleteAll() {
+        return $this->createQueryBuilder('k')
+            ->delete(Klant::class, 'k')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Klant[] Returns an array of Klant objects
     //  */

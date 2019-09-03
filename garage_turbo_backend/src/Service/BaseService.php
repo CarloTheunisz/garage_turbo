@@ -16,6 +16,14 @@ class BaseService {
         $this->rep = $this->em->getRepository($entity);
     }
 
+    public function getEntityManager() {
+        return $this->em;
+    }
+
+    public function getRep() {
+        return $this->rep;
+    }
+
     /**
      * Functie: find
      * Doel:    vind de record met het meegegeven id
