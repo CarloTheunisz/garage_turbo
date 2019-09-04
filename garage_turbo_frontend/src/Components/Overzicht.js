@@ -112,6 +112,9 @@ class Overzicht extends Component {
                             Onlangs op onderhoud
                         </label>
                     </div>
+                    <div>
+                        Het overzicht wordt geladen...
+                    </div>
                 </div>
             );
         }
