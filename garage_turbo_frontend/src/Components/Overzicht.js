@@ -1,8 +1,33 @@
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
+import API from './../Library/API';
+import Tabellenrij from './TabellenRij';
 
 class Overzicht extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoaded: false,
+            rawData: []
+        }
+    }
+
+    componentDidMount() {
+        API.fetchData('http://localhost/garage_turbo/garage_turbo_backend/public/api')
+        .then( data => {
+            console.log(data);
+            this.setState({
+                isLoaded: true,
+                rawData: data
+            })
+        })
+        .catch( error => {
+            console.log(error)
+        });
+    }
+
     render() { 
+        console.log(this.state.data);
         return (
             <div className="normal-page">
                 <div className="space-below">
@@ -27,12 +52,11 @@ class Overzicht extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Jean-Pierre</td>
-                            <td>47-PZM-1</td>
-                            <td>Honda</td>
-                            <td>7979</td>
-                        </tr>
+                        { this.state.rawData.map( item => {
+                            return(
+                                <Tabellenrij data={ item }/>
+                            );
+                        })}
                     </tbody>
                 </Table>
             </div>
