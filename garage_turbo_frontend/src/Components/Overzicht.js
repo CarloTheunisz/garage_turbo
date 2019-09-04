@@ -14,7 +14,7 @@ class Overzicht extends Component {
     }
 
     componentDidMount() {
-        API.fetchData('http://localhost/garage_turbo/garage_turbo_backend/public/api')
+        API.fetchData('http://localhost/garage_turbo/garage_turbo_backend/public/api', 'GET')
         .then( data => {
             this.setState({
                 isLoaded: true,

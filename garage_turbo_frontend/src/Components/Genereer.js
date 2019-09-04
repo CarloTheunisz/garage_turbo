@@ -3,11 +3,11 @@ import API from '../Library/API';
 
 class Genereer extends Component {
     generate() {
-        API.deleteData('http://localhost/garage_turbo/garage_turbo_backend/public/api/delete/all')
+        API.fetchData('http://localhost/garage_turbo/garage_turbo_backend/public/api/delete/all', 'DELETE')
         .catch( error => {
             console.log(error)
         });
-        API.postData('http://localhost/garage_turbo/garage_turbo_backend/public/api/create/testdata')
+        API.fetchData('http://localhost/garage_turbo/garage_turbo_backend/public/api/create/testdata', 'POST')
         .catch( error => {
             console.log(error)
         });
