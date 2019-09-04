@@ -8,17 +8,18 @@ class Overzicht extends Component {
         super(props);
         this.state = {
             isLoaded: false,
-            rawData: []
+            rawData: [],
+            filteredData: []
         }
     }
 
     componentDidMount() {
         API.fetchData('http://localhost/garage_turbo/garage_turbo_backend/public/api')
         .then( data => {
-            console.log(data);
             this.setState({
                 isLoaded: true,
-                rawData: data
+                rawData: data,
+                filteredData: data
             })
         })
         .catch( error => {
@@ -26,21 +27,50 @@ class Overzicht extends Component {
         });
     }
 
+    filterOne() {
+        var filtered = this.state.rawData;
+        this.setState({
+            filteredData: filtered
+        });
+    }
+
+    filterTwo() {
+        var filtered = this.state.rawData.filter(
+            item => item.kilometerstand > (item.vorigeStand + item.automerk.beurtInterval - 5000));
+        this.setState({
+            filteredData: filtered
+        });
+    }
+
+    filterThree() {
+        var filtered = this.state.rawData.filter(
+            item => item.kilometerstand < (item.vorigeStand + 5000));
+        this.setState({
+            filteredData: filtered
+        });
+    }
+
     render() { 
-        console.log(this.state.data);
+        console.log(this.state.filteredData);
         return (
             <div className="normal-page">
                 <div className="space-below">
                     <b>Overzicht klanten</b>
                 </div>
                 <div className="radio">
-                    <label className="radio-label"><input type="radio" name="optradio"/>Toon alle auto's</label>
+                    <label className="radio-label"><input type="radio" name="optradio" onChange={ this.filterOne.bind(this) }/>
+                        Toon alle auto's
+                    </label>
                 </div>
                 <div className="radio">
-                    <label className="radio-label"><input type="radio" name="optradio"/>Binnenkort op onderhoud</label>
+                    <label className="radio-label"><input type="radio" name="optradio" onChange={this.filterTwo.bind(this) }/>
+                        Binnenkort op onderhoud
+                    </label>
                 </div>
                 <div className="radio space-below">
-                    <label className="radio-label"><input type="radio" name="optradio"/>Onlangs op onderhoud</label>
+                    <label className="radio-label"><input type="radio" name="optradio" onChange={ this.filterThree.bind(this) }/>
+                        Onlangs op onderhoud
+                    </label>
                 </div>
                 <Table size="sm" bordered responsive>
                     <thead>
@@ -52,7 +82,7 @@ class Overzicht extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        { this.state.rawData.map( item => {
+                        { this.state.filteredData.map( item => {
                             return(
                                 <Tabellenrij data={ item }/>
                             );
