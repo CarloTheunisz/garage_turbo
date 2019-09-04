@@ -9,18 +9,39 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  min-height: calc(100vh - 55px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.header {
+  width: 100%;
+  align-content: flex-end;
+  border-bottom: 1px solid #000000;
+}
+
+.header-item {
+  margin-right: 8px;
+}
+
+.normal-page {
+  margin: 16px;
+  font-size: calc(10px + 2vmin);
+}
+
+.space-below {
+  margin-bottom: calc(10px + 2vmin);
+}
+
+.radio-label {
+  margin: 0;
 }
 
 @keyframes App-logo-spin {
