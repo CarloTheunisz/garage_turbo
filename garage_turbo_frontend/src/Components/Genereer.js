@@ -1,7 +1,20 @@
 import React, { Component } from 'react';
+import API from '../Library/API';
 
 class Genereer extends Component {
-    render() { 
+    generate() {
+        API.deleteData('http://localhost/garage_turbo/garage_turbo_backend/public/api/delete/all')
+        .catch( error => {
+            console.log(error)
+        });
+        API.postData('http://localhost/garage_turbo/garage_turbo_backend/public/api/create/testdata')
+        .catch( error => {
+            console.log(error)
+        });
+        console.log('Functie zou nu klaar moeten zijn. Test de get in postman om te zien of er records zijn toegevoegd.');
+    }
+
+    render() {
         return (
             <div className="normal-page">
                 <div className="space-below">
@@ -13,7 +26,7 @@ class Genereer extends Component {
                 <div className="space-below">
                     Bestaande gegevens worden verwijderd!
                 </div>
-                <button type="button" className="btn btn-primary">
+                <button type="button" className="btn btn-primary" onClick={ this.generate.bind(this) }>
                     Genereer
                 </button>
             </div>
