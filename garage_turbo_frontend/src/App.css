@@ -31,6 +31,10 @@
   border: 1px solid #000000;
 }
 
+.btn-table {
+  width: -webkit-fill-available;
+}
+
 input[type=radio] {
   vertical-align: middle;
 }

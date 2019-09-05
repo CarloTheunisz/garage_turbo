@@ -19,7 +19,7 @@ class Tabellenrij extends Component {
                 <td>{ this.props.data.automerk.merknaam }</td>
                 <td>{ this.props.data.kilometerstand }</td>
                 <td>{ this.props.data.beurtenAantal }</td>
-                <td><button className="btn btn-primary btn-body" name={ this.props.data.id } onClick={ this.onClick.bind(this) }>Voer uit</button></td>
+                <td><button className="btn btn-primary btn-body btn-table" name={ this.props.data.id } onClick={ this.onClick.bind(this) }>Voer uit</button></td>
             </tr>
         );
     }
