@@ -20,40 +20,74 @@ class Overzicht extends Component {
             this.setState({
                 isLoaded: true,
                 rawData: data,
-                filteredData: data
+                filteredData: data,
+                radioChecked: false
             })
         })
         .catch( error => {
             console.log(error)
         });
+
+        setInterval(() => {
+            API.fetchData('http://localhost/garage_turbo/garage_turbo_backend/public/api', 'GET')
+            .then( data => {
+                if( data !== []) {
+                    var filtered = this.filterData(data, this.state.radioChecked);
+                    this.setState({
+                        rawData: data,
+                        filteredData: filtered
+                    })
+                }
+            })
+        }, 5000);
     }
 
-    filterOne() {
+    filterBinnenkort(data) {
+        return data.filter(item => item.kilometerstand > (item.vorigeStand + item.automerk.beurtInterval - 5000));
+    }
+
+    filterOnlangs(data) {
+        return data.filter(item => item.kilometerstand < (item.vorigeStand + 5000));
+    }
+
+    filterOne(event) {
         var filtered = this.state.rawData;
         this.setState({
-            filteredData: filtered
+            filteredData: filtered, 
+            radioChecked: event.target.value
         });
     }
 
-    filterTwo() {
-        var filtered = this.state.rawData.filter(
-            item => item.kilometerstand > (item.vorigeStand + item.automerk.beurtInterval - 5000));
+    filterTwo(event) {
+        var filtered = this.filterBinnenkort(this.state.rawData);
         this.setState({
-            filteredData: filtered
+            filteredData: filtered,
+            radioChecked: event.target.value
         });
     }
 
-    filterThree() {
-        var filtered = this.state.rawData.filter(
-            item => item.kilometerstand < (item.vorigeStand + 5000));
+    filterThree(event) {
+        var filtered = this.filterOnlangs(this.state.rawData);
         this.setState({
-            filteredData: filtered
+            filteredData: filtered,
+            radioChecked: event.target.value
         });
+    }
+
+    filterData(data, filterType) {
+        switch(filterType) {
+            case '1':
+                return data;
+            case '2':
+                return this.filterBinnenkort(data);
+            case '3':
+                return this.filterOnlangs(data);
+            default:
+                return data;
+        }
     }
 
     render() { 
-        // console.log(this.props.location.pathname);
-
         if(this.state.isLoaded) {
             return (
                 <React.Fragment>
@@ -63,17 +97,17 @@ class Overzicht extends Component {
                             <b>Overzicht klanten</b>
                         </div>
                         <div className="radio">
-                            <label className="radio-label"><input type="radio" name="optradio" onChange={ this.filterOne.bind(this) }/>
+                            <label className="radio-label"><input type="radio" name="optradio" value="1" onChange={ this.filterOne.bind(this) }/>
                                 Toon alle auto's
                             </label>
                         </div>
                         <div className="radio">
-                            <label className="radio-label"><input type="radio" name="optradio" onChange={this.filterTwo.bind(this) }/>
+                            <label className="radio-label"><input type="radio" name="optradio" value="2" onChange={this.filterTwo.bind(this) }/>
                                 Binnenkort op onderhoud
                             </label>
                         </div>
                         <div className="radio space-below">
-                            <label className="radio-label"><input type="radio" name="optradio" onChange={ this.filterThree.bind(this) }/>
+                            <label className="radio-label"><input type="radio" name="optradio" value="3" onChange={ this.filterThree.bind(this) }/>
                                 Onlangs op onderhoud
                             </label>
                         </div>
