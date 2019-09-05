@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import API from '../Library/API';
+import Header from './Header';
 
 class Genereer extends Component {
     generate() {
@@ -16,20 +17,23 @@ class Genereer extends Component {
 
     render() {
         return (
-            <div className="normal-page">
-                <div className="space-below">
-                    <b>Genereer Test Data</b>
+            <React.Fragment>
+                <Header path={ this.props.location.pathname }/>
+                <div className="normal-page">
+                    <div className="space-below">
+                        <b>Genereer Test Data</b>
+                    </div>
+                    <div>
+                        Er worden willekeurig tussen 10 en 100 klanten toegevoegd aan de database.
+                    </div>
+                    <div className="space-below">
+                        Bestaande gegevens worden verwijderd!
+                    </div>
+                    <button type="button" className="btn btn-primary" onClick={ this.generate.bind(this) }>
+                        Genereer
+                    </button>
                 </div>
-                <div>
-                    Er worden willekeurig tussen 10 en 100 klanten toegevoegd aan de database.
-                </div>
-                <div className="space-below">
-                    Bestaande gegevens worden verwijderd!
-                </div>
-                <button type="button" className="btn btn-primary" onClick={ this.generate.bind(this) }>
-                    Genereer
-                </button>
-            </div>
+            </React.Fragment>
         );
     }
 }
