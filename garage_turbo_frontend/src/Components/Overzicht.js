@@ -130,11 +130,11 @@ class Overzicht extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                { this.state.filteredData.map( item => {
+                                { this.state.filteredData instanceof Array ? this.state.filteredData.map( item => {
                                     return(
                                         <Tabellenrij data={ item }/>
                                     );
-                                })}
+                                }) : null }
                             </tbody>
                         </Table>
                     </div>
