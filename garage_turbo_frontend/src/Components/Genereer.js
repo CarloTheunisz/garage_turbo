@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import config from '../Config/Config.js';
 import API from '../Library/API';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './Header';
@@ -13,9 +14,9 @@ class Genereer extends Component {
     }
 
     generate() {
-        API.fetchData('http://localhost/garage_turbo/garage_turbo_backend/public/api/delete/all', 'DELETE')
+        API.fetchData(config.baseUrl + config.deleteAll, 'DELETE')
         .then( () => {
-            API.fetchData('http://localhost/garage_turbo/garage_turbo_backend/public/api/create/testdata', 'POST')
+            API.fetchData(config.baseUrl + config.generateTestData, 'POST')
             .then( () => {
                 this.setState({
                     hasGenerated: true

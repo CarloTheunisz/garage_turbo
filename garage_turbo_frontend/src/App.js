@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import config from './Config/Config';
 import API from './Library/API';
 import Startpagina from './Components/Startpagina';
 import Genereer from './Components/Genereer';
@@ -8,7 +9,7 @@ import Overzicht from './Components/Overzicht'
 
 function App() {
   setInterval(() => {
-    API.fetchData('http://localhost/garage_turbo/garage_turbo_backend/public/api/update/kilometerstand/all', 'PUT')
+    API.fetchData(config.baseUrl + config.updateKilometerstand, 'PUT')
   }, 5000);
 
   return (

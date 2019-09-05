@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { Table } from 'reactstrap';
+import config from './../Config/Config';
 import API from './../Library/API';
 import Header from './Header';
 import Tabellenrij from './TabellenRij';
 
 class Overzicht extends Component {
+    intervalId = 0;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -15,7 +18,7 @@ class Overzicht extends Component {
     }
 
     componentDidMount() {
-        API.fetchData('http://localhost/garage_turbo/garage_turbo_backend/public/api', 'GET')
+        API.fetchData(config.baseUrl, 'GET')
         .then( data => {
             this.setState({
                 isLoaded: true,
@@ -28,8 +31,8 @@ class Overzicht extends Component {
             console.log(error)
         });
 
-        setInterval(() => {
-            API.fetchData('http://localhost/garage_turbo/garage_turbo_backend/public/api', 'GET')
+        this.intervalId = setInterval(() => {
+            API.fetchData(config.baseUrl, 'GET')
             .then( data => {
                 if( data !== []) {
                     var filtered = this.filterData(data, this.state.radioChecked);
@@ -40,6 +43,10 @@ class Overzicht extends Component {
                 }
             })
         }, 5000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.intervalId);
     }
 
     filterBinnenkort(data) {
