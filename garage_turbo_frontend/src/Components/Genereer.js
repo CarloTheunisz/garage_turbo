@@ -3,6 +3,13 @@ import API from '../Library/API';
 import Header from './Header';
 
 class Genereer extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            text: ""
+        }
+    }
+
     generate() {
         API.fetchData('http://localhost/garage_turbo/garage_turbo_backend/public/api/delete/all', 'DELETE')
         .catch( error => {
@@ -12,7 +19,9 @@ class Genereer extends Component {
         .catch( error => {
             console.log(error)
         });
-        console.log('Functie zou nu klaar moeten zijn. Test de get in postman om te zien of er records zijn toegevoegd.');
+        this.setState({
+            text: 'Testdata gegenereerd. Bekijk het overzicht van klanten om de wijzigingen te zien.'
+        })
     }
 
     render() {
@@ -29,9 +38,12 @@ class Genereer extends Component {
                     <div className="space-below">
                         Bestaande gegevens worden verwijderd!
                     </div>
-                    <button type="button" className="btn btn-primary btn-body" onClick={ this.generate.bind(this) }>
+                    <button type="button" className="btn btn-primary btn-body space-below" onClick={ this.generate.bind(this) }>
                         Genereer
                     </button>
+                    <div>
+                        { this.state.text }
+                    </div>
                 </div>
             </React.Fragment>
         );
