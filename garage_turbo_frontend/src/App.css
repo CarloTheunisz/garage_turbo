@@ -1,13 +1,3 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
 .App-header {
   min-height: calc(100vh - 55px);
   display: flex;
@@ -15,10 +5,6 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 .header {
@@ -38,6 +24,15 @@
 
 .space-below {
   margin-bottom: calc(10px + 2vmin);
+}
+
+.btn-body {
+  border-radius: 0;
+  border: 1px solid #000000;
+}
+
+input[type=radio] {
+  vertical-align: middle;
 }
 
 .radio-label {

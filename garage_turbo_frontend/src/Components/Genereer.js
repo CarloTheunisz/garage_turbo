@@ -29,7 +29,7 @@ class Genereer extends Component {
                     <div className="space-below">
                         Bestaande gegevens worden verwijderd!
                     </div>
-                    <button type="button" className="btn btn-primary" onClick={ this.generate.bind(this) }>
+                    <button type="button" className="btn btn-primary btn-body" onClick={ this.generate.bind(this) }>
                         Genereer
                     </button>
                 </div>
