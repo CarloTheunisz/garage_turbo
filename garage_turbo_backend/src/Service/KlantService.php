@@ -23,6 +23,8 @@ class KlantService extends BaseService {
         $klant->setKlantnaam('Placeholder');
         $klant->setKenteken($this->generateKenteken());
         $klant->setKilometerstand('0');
+        $klant->setBeurtenAantal('0');
+        $klant->setVorigeStand('0');
         $this->em->persist($klant);
         $this->em->flush();
 
@@ -42,6 +44,19 @@ class KlantService extends BaseService {
         $this->em->flush();
 
         return new Response('Kilometerstand opgehoogd bij klant_'.$klant->getId());
+    }
+
+    public function updateVoorOnderhoud($id) {
+        $klant = $this->find($id);
+        $nieuwAantal = $klant->getBeurtenAantal() + 1;
+
+        $klant->setBeurtenAantal($nieuwAantal);
+        $klant->setVorigeStand($klant->getKilometerstand());
+        $klant->setOnderhoudsdatum(new \DateTime());
+        $this->em->persist($klant);
+        $this->em->flush();
+
+        return new Response('Onderhoud uitgevoerd bij klant_'.$klant->getId());
     }
 
     public function deleteAll() {

@@ -125,6 +125,8 @@ class Overzicht extends Component {
                                     <th>Kenteken</th>
                                     <th>Merk</th>
                                     <th>Kilometerstand</th>
+                                    <th>Aantal onderhoudsbeurten</th>
+                                    <th>Onderhoud</th>
                                 </tr>
                             </thead>
                             <tbody>

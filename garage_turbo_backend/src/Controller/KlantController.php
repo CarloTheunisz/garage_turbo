@@ -86,6 +86,16 @@ class KlantController extends FOSRestController {
     }
 
     /**
+     * @Rest\Put("/update/onderhoud/{id}", requirements={"id"="\d+"})
+     */
+    public function updateVoorOnderhoud(Request $request):View {
+        $id = $request->get("id");
+        $data = $this->ks->updateVoorOnderhoud($id);
+
+        return( View::create($data, Response::HTTP_OK) );
+    }
+
+    /**
      * @Rest\Delete("/delete/all")
      */
     public function deleteAll(Request $request):View {
