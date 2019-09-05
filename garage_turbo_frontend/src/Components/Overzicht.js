@@ -50,11 +50,11 @@ class Overzicht extends Component {
     }
 
     filterBinnenkort(data) {
-        return data.filter(item => item.kilometerstand > (item.vorigeStand + item.automerk.beurtInterval - 5000));
+        return data instanceof Array ? data.filter(item => item.kilometerstand > (item.vorigeStand + item.automerk.beurtInterval - 5000)) : data;
     }
 
     filterOnlangs(data) {
-        return data.filter(item => item.kilometerstand < (item.vorigeStand + 5000));
+        return data instanceof Array ? data.filter(item => item.kilometerstand < (item.vorigeStand + 5000)) : data;
     }
 
     filterOne(event) {
