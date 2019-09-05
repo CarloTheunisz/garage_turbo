@@ -14,16 +14,20 @@ class Genereer extends Component {
 
     generate() {
         API.fetchData('http://localhost/garage_turbo/garage_turbo_backend/public/api/delete/all', 'DELETE')
-        .catch( error => {
-            console.log(error)
-        });
-        API.fetchData('http://localhost/garage_turbo/garage_turbo_backend/public/api/create/testdata', 'POST')
-        .catch( error => {
-            console.log(error)
-        });
-        this.setState({
-            hasGenerated: true
+        .then( () => {
+            API.fetchData('http://localhost/garage_turbo/garage_turbo_backend/public/api/create/testdata', 'POST')
+            .then( () => {
+                this.setState({
+                    hasGenerated: true
+                })
+            })
+            .catch( error => {
+                console.log(error)
+            });
         })
+        .catch( error => {
+            console.log(error)
+        });
     }
 
     render() {
